@@ -30,7 +30,7 @@ class Reviewer(Mentor):
     pass
 
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
+best_student = Student('Ruoy', 'Eman', 'Man')
 best_student.courses_in_progress += ['Python']
 
 cool_mentor = Mentor('Some', 'Buddy')

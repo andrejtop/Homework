@@ -6,6 +6,22 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
+        self.average_rating = float()
+
+    def __str__(self):
+
+        grades_count = 0
+        courses_in_progress_string = ', '.join(self.courses_in_progress)
+        finished_courses_string = ', '.join(self.finished_courses)
+        for k in self.grades:
+            grades_count += len(self.grades[k])
+        self.average_rating = sum(map(sum, self.grades.values())) / grades_count
+        res = f'Имя: {self.name}\n' \
+              f'Фамилия: {self.surname}\n' \
+              f'Средняя оценка за домашнее задание: {self.average_rating}\n' \
+              f'Курсы в процессе обучения: {courses_in_progress_string}\n' \
+              f'Завершенные курсы: {finished_courses_string}'
+        return res
 
     def rate_hw(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.courses_attached and course in lecturer.courses_in_progress:
@@ -15,7 +31,6 @@ class Student:
                 lecturer.grades[course] = [grade]
         else:
             return 'Ошибка'
-
 
 class Mentor:
     def __init__(self, name, surname):
@@ -54,12 +69,6 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-
-cool_mentor = Mentor('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
-
-
-print(best_student.grades)
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}'
+        return res
